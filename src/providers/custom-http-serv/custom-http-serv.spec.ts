@@ -8,7 +8,7 @@ describe('Provider Service', () => {
     let service: CustomHttpServProvider;
     it('should return a string wuTang', () => {
  
-        expect(service.wuTangls).toBeTruthy();
+        expect(service.wuTangls).toBe('For the Children');
  
     });
  
