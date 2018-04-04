@@ -25,7 +25,7 @@ var WuTangProvider = /** @class */ (function () {
         return "For the Children";
     };
     WuTangProvider.prototype.myFavoriteBand = function () {
-        return this.http.get(this.url + '/tariq');
+        return this.http.get(this.url + '/tariq/fav');
     };
     WuTangProvider.prototype.newBandILike = function (value) {
         return this.http.post(this.url + '/tariq', { value: value });

@@ -22,7 +22,7 @@ return "For the Children";
   }
 
   myFavoriteBand() {
-return this.http.get(this.url + '/tariq');
+return this.http.get(this.url + '/tariq/fav');
   }
 
   newBandILike(value: string) {

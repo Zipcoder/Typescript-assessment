@@ -20,7 +20,7 @@ describe("The WuTang Provider's", () => {
     })
 
     describe('myFavoriteBand method', () => {
-        it('should GET "Wu-Tang Clan" from the endpoint: "https://www.somewebsite.com/tariq"', inject([HttpTestingController, WuTangProvider],
+        it('should GET "Wu-Tang Clan" from the endpoint: "https://www.somewebsite.com/tariq/fav"', inject([HttpTestingController, WuTangProvider],
             (httpMock: HttpTestingController, wuTangProvider: WuTangProvider) => {
                 wuTangProvider.myFavoriteBand().subscribe((data: any) => {
 
@@ -28,11 +28,11 @@ describe("The WuTang Provider's", () => {
 
                 })
 
-                const mockReq = httpMock.expectOne(wuTangProvider.url + '/tariq');
+                const mockReq = httpMock.expectOne(wuTangProvider.url + '/tariq/fav');
                 expect(mockReq.cancelled).toBeFalsy();
                 expect(mockReq.request.responseType).toEqual('json');
                 expect(mockReq.request.method).toBe('GET');
-                expect(mockReq.request.url).toBe('https://www.somewebsite.com/tariq');
+                expect(mockReq.request.url).toBe('https://www.somewebsite.com/tariq/fav');
                 mockReq.flush({ name: "Wu-Tang Clan" });
                 httpMock.verify();
 
