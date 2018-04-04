@@ -1,53 +1,41 @@
 import { TestBed, inject, async } from '@angular/core/testing';
-import { Http, HttpModule, BaseRequestOptions, Response, ResponseOptions } from '@angular/http';
-import { MockBackend } from '@angular/http/testing';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { WuTangProvider } from './wu-tang';
 
 describe('WuTangProvider', () => {
-	beforeEach(async(() => {
+	let httpClient: HttpClient;
+	let httpTestingController: HttpTestingController;
+	let wuTang: WuTangProvider;
+	let testUrl = 'assets/data';
 
-		TestBed.configureTestingModule({
-			declarations: [
-			],
-			providers: [
-			WuTangProvider,
-			MockBackend,
-			BaseRequestOptions,
-			{
-				provide: Http,
-				useFactory: (mockBackend, options) => {
-					return new Http(mockBackend, options);
-				},
-				deps: [MockBackend, BaseRequestOptions]
-			}
-			],
-			imports: [
-			HttpModule
-			]
-		}).compileComponents();
-	}));
 	beforeEach(() => {
-	});
-	// joshmorony the goat
+		TestBed.configureTestingModule({
+			imports: [ HttpClientTestingModule ]
+		});
 
-	it('is for the children', inject([WuTangProvider, MockBackend], (wuTang, mockBackend)  => {
+		// Inject the http service and test controller for each test
+    	httpClient = TestBed.get(HttpClient);
+    	httpTestingController = TestBed.get(HttpTestingController);
+    	wuTang = new WuTangProvider(httpClient);
+    });
+  	/// Tests begin ///
+
+	it('is for the children', () => {
 		expect(wuTang.wuTangIs()).toBe("For the Children");
-	}));
+	});
 
-	it('should be my favorite band', inject([WuTangProvider, MockBackend], (wuTang, mockBackend) => {
- 
-        const mockResponse = '{"favoriteBand":"WuTang"}';
- 
-        mockBackend.connections.subscribe((connection) => {
- 
-            connection.mockRespond(new Response(new ResponseOptions({
-                body: mockResponse
-            })));
- 
-        });
- 
-        let favoriteBand = wuTang.myFavoriteBand();
- 
-        expect(favoriteBand).toEqual("WuTang");
-    }));
+	it('should be my favorite band', () => {
+		let favoriteBand = wuTang.myFavoriteBand();
+		expect(favoriteBand).toEqual("WuTang");
+	});
+
+	it('should accept new bands I like', () => {
+		const band = "Carpenter Brut";
+		const testData: string = JSON.stringify(band);
+
+		wuTang.newBandILike(band).subscribe(data => {
+			expect(data).toEqual("Carpenter Brut");
+		});
+	});
 });
