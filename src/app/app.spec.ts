@@ -7,6 +7,7 @@ describe('WuTangProvider', () => {
 	let provider: WuTangProvider;
 	let httpMock: HttpTestingController;
 
+
 	// can access these variables before each test	
 	beforeEach(() => {
 		TestBed.configureTestingModule({
@@ -16,6 +17,10 @@ describe('WuTangProvider', () => {
 
 		provider = TestBed.get(WuTangProvider);
 		httpMock = TestBed.get(HttpTestingController);
+	});
+
+	it('should say For the Children', () => {
+			expect(provider.wuTangIs()).toEqual('For the Children');
 	});
 
 	it('should get the data successfully', () => {
