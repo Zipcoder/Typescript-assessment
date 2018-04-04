@@ -15,7 +15,7 @@ describe('DataService', () => {
     });
   });
 
-  it('should get users',
+  it('should get favoriteBand',
     inject(
       [HttpTestingController, DataProvider],
       (httpMock: HttpTestingController, dataService: DataProvider) => {
@@ -24,14 +24,14 @@ describe('DataService', () => {
           { name: 'Juliette', website: 'nope.com' }
         ];
 
-        dataService.getData().subscribe((event: HttpEvent<any>) => {
+        dataService.myFavoriteBand(1).subscribe((event: HttpEvent<any>) => {
           switch (event.type) {
             case HttpEventType.Response:
               expect(event.body).toEqual(mockUsers);
           }
         });
 
-        const mockReq = httpMock.expectOne(dataService.url);
+        const mockReq = httpMock.expectOne(`http://replace.with.api/anything/1`);
 
         expect(mockReq.cancelled).toBeFalsy();
         expect(mockReq.request.responseType).toEqual('json');
@@ -42,54 +42,31 @@ describe('DataService', () => {
     )
   );
 
-  it('should get wuTangIs',
-  inject(
-    [HttpTestingController, DataProvider],
-    (httpMock: HttpTestingController, dataService: DataProvider) => {
-      const mockWuTang = [
-        { 'For the Children':'Big Baby Jesus' },
-
-      ];
-
-      dataService.getData().subscribe((event: HttpEvent<any>) => {
-        switch (event.type) {
-          case HttpEventType.Response:
-            expect(event.body).toEqual(mockWuTang);
-        }
-      });
-
-      const mockReq = httpMock.expectOne(dataService.url);
-
-      expect(mockReq.cancelled).toBeFalsy();
-      expect(mockReq.request.responseType).toEqual('json');
-      mockReq.flush(mockWuTang);
-
-      httpMock.verify();
-    }
-  )
-);
 
 
-  // it('should post the correct data',
-  //   inject(
-  //     [HttpTestingController, DataProvider],
-  //     (httpMock: HttpTestingController, dataService: DataProvider) => {
-  //   dataService.post('firstname' ,'Bo' ).subscribe((data: any) => {
-  //     expect(data.item).toBe('firstname');
-  //     expect(data.name).toBe('Bo');
+  it('should post the correct data',
+    inject(
+      [HttpTestingController, DataProvider],
+      (httpMock: HttpTestingController, dataService: DataProvider) => {
+    dataService.newBandILIke('Wu Tang').subscribe((data: any) => {
+      expect(data.value).toBe('Wu Tang');
 
-  //   });
+    });
 
-  //   const req = httpMock.expectOne(`http://replace.with.api/anything`, 'post to api');
-  //   expect(req.request.method).toBe('POST');
+    const req = httpMock.expectOne(`http://replace.with.api/anything`, 'post to api');
+    expect(req.request.method).toBe('POST');
 
-  //   req.flush({
-  //     item: 'firstname',
-  //     name: 'Bo'
-  //   });
+    req.flush({
+      value: 'Wu Tang'
+    });
 
-  //   httpMock.verify();
-  // }));
+    httpMock.verify();
+  }));
 
+});
 
+describe('simple print', () => {
+  it('should print For the Children', () => {
+    expect(DataProvider.wuTangIs()).toEqual('For the Children');
+  });
 });
