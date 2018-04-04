@@ -8,28 +8,17 @@ export class WuTangProvider {
   constructor(public httpClient: HttpClient) {
     
   }
-  // getSingle<T>(id: number) {
-  //   return this.httpClient.get<T>(`http://replace.with.api/anything/${id}`);
-  // }
-
-  post<T>(item: any) {
-    return this.httpClient.post<T>(`http://replace.with.api/anything`, item);
-  }
-
-  put<T>(id: number, item: any) {
-    return this.httpClient.put<T>(`http://replace.with.api/anything/${id}`, item);
-  }
-
-  delete(id: number) {
-    return this.httpClient.delete(`http://replace.with.api/anything/${id}`);
-  }
 
   wuTangIs(){
     return 'For the Children';
   }
 
-  myFavoriteBand<T>(id: number) {
-    return this.httpClient.get<T>(`http://replace.with.api/anything/${id}`);
+  myFavoriteBand(){
+    return this.httpClient.get(`http://www.wu.tang/lover`);
+  }
+
+  newBandILike<T>(id: string) {
+    return this.httpClient.get<T>(`http://www.wu.tang/lover/${id}`);
   }
 
 }

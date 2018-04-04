@@ -16,7 +16,6 @@ describe('WuTangService', () => {
       providers: [WuTangProvider]
     });
 
-    // inject the service
     service = TestBed.get(WuTangProvider);
     httpMock = TestBed.get(HttpTestingController);
   });
@@ -26,19 +25,34 @@ describe('WuTangService', () => {
         expect(typeof service.wuTangIs()).toBe('string');
     });
 
-      it('should get my favorite band', () => {
-    service.myFavoriteBand(1).subscribe((data: any) => {
-      expect(data.band).toBe('Black Sabbath');
-    });
+    it('should get my favorite band', () => {
+        service.myFavoriteBand().subscribe((data: any) => {
+          expect(data.band).toBe('Black Sabbath');
+        });
+    
+        const req = httpMock.expectOne(`http://www.wu.tang/lover`);
+        expect(req.request.method).toBe('GET');
+    
+        req.flush({
+          band: 'Black Sabbath'
+        });
+    
+        httpMock.verify();
+    
+        });
 
-    const req = httpMock.expectOne(`http://replace.with.api/anything/1`, 'call to api');
-    expect(req.request.method).toBe('GET');
-
-    req.flush({
-      band: 'Black Sabbath'
-    });
-
-    httpMock.verify();
-
-    });
+        it('should get the correct star wars character', () => {
+            service.newBandILike('string').subscribe((data: any) => {
+              expect(data.name).toBe('Luke Skywalker');
+            });
+        
+            const req = httpMock.expectOne(`http://www.wu.tang/lover/string`, 'call to api');
+            expect(req.request.method).toBe('GET');
+        
+            req.flush({
+              name: 'Luke Skywalker'
+            });
+        
+            httpMock.verify();
+        });
 });
