@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import "rxjs/add/operator/do";
 
 /*
   Generated class for the TestRequestProvider provider.
@@ -10,8 +11,18 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class TestRequestProvider {
 
-  constructor(public http: HttpClient) {
+  jasonTheJSON:string = '{ "name":"jason" }'
+
+  constructor() {
     console.log('Hello TestRequestProvider Provider');
   }
+
+  public wuTangIs(){
+    return "For the Children";
+  }
+
+  // myFavoriteBand(){
+  //   this.http.get("fakeurl");
+  // }
 
 }
