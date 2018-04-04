@@ -22,7 +22,7 @@ export class TestRequestProvider {
   }
 
   myFavoriteBand(){
-    this.http.get("fakeurl");
+    return this.http.get("fakeurl");
   }
 
 }
