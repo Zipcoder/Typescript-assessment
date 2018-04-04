@@ -5,16 +5,13 @@ import { HttpClient, HttpRequest } from '@angular/common/http';
 export class DataProvider {
   url = 'https://jsonplaceholder.typicode.com/users';
   postUrl = 'http://replace.with.api/anything';
-  answer: any;
 
   constructor() {
 
-
-    this.answer = ['For the Children'];
   }
 
   wuTangIs() {
-    return this.answer
+    return 'For the Children';
   }
 
 
