@@ -25,6 +25,7 @@ export class WuProvider {
     return this.http.get(`http://wutangclan.toolit/whatever/1`);
   }
 
-
-
+  newBandILike<T>(value: any){
+      return this.http.post<T>(`http://wutangclan.toolit/whatever/1`, value);
+  }
 }

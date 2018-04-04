@@ -46,5 +46,23 @@ describe("Test Suite", () => {
   
         httpMocK.verify();
         });
+
+    it("Should post new band I like", () => {
+        provider.newBandILike<any>({ 
+            bandname: "A Day To Remember" }).subscribe((data: any) => {
+        expect(data.bandname).toBe("A Day To Remember");
+      });
+
+    const req = httpMocK.expectOne(
+      `http://wutangclan.toolit/whatever/1`,
+    );
+    expect(req.request.method).toBe("POST");
+
+    req.flush({
+      bandname: "A Day To Remember"
     });
+
+    httpMocK.verify();
+    });
+  });
 });
