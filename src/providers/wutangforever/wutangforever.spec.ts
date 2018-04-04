@@ -34,7 +34,7 @@ describe("Type Script Assesment Test Suite", () => {
 
       httpMocK.verify();
     });
-    it("Should post my new favorite band", () => {
+    it("Should post the new band I like", () => {
       provider
         .newBandILIke<any>({ favoriteband: "A Tribe Called Quest" })
         .subscribe((data: any) => {
