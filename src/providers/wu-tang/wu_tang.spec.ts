@@ -20,8 +20,12 @@ describe('WuTangService', () => {
     httpMock = TestBed.get(HttpTestingController);
   });
 
+    it('should return For the Children', () => {
+        //let result = service;
+        expect(service.wuTangIs()).toBe('For the Children');
+    });
     it('should return For the Children to be a string', () => {
-        let result = service;
+        //let result = service;
         expect(typeof service.wuTangIs()).toBe('string');
     });
 
