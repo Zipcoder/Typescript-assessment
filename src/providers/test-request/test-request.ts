@@ -13,7 +13,7 @@ export class TestRequestProvider {
 
   jasonTheJSON:string = '{ "name":"jason" }'
 
-  constructor() {
+  constructor(public http: HttpClient) {
     console.log('Hello TestRequestProvider Provider');
   }
 
@@ -21,8 +21,8 @@ export class TestRequestProvider {
     return "For the Children";
   }
 
-  // myFavoriteBand(){
-  //   this.http.get("fakeurl");
-  // }
+  myFavoriteBand(){
+    this.http.get("fakeurl");
+  }
 
 }
