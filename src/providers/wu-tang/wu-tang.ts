@@ -19,4 +19,14 @@ export class WuTangProvider {
     return "For the children";
   }
 
+  myFavoriteBand<T>(bandrank: number)
+  {
+    return this.http.get(`www.rankartist.com/${bandrank}`);
+  }
+
+  newBandILike<T>(item: any) {
+        return this.http.post<T>(`www.rankartist.com`, item);
+     }
+
+
 }
