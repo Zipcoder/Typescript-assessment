@@ -12,12 +12,12 @@ export class WuTangProvider {
     return 'For the Children';
   }
 
-  myFavoriteBand<T> (id: any) {
-    return this.http.get<T>(`http://google.com/${id}`);
+  public myFavoriteBand<T> (id: any) {
+    return this.http.get<T>(`https://my-json-server.typicode.com/bth1994/fakeServer/db/${id}`);
   }
 
-  post<T>(item: any) {
-    return this.http.post<T>(`http://google.com/`, item);
+  public newBandILike<T>(item: any) {
+    return this.http.post<T>(`https://my-json-server.typicode.com/bth1994/fakeServer/db/`, item);
   }
 
 }

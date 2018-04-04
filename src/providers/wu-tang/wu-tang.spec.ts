@@ -36,7 +36,7 @@ describe('http calls', () => {
       expect(data.name).toBe('Said the Sky');
     });
 
-    const req = httpMock.expectOne(`http://google.com/SaidtheSky`, 'call to api');
+    const req = httpMock.expectOne(`https://my-json-server.typicode.com/bth1994/fakeServer/db/SaidtheSky`, 'call to api');
     expect(req.request.method).toBe('GET');
 
     req.flush({
@@ -48,15 +48,15 @@ describe('http calls', () => {
   });
 
   it('should post the correct data', () => {
-    service.post<any>({ firstname: 'firstname' }).subscribe((data: any) => {
-      expect(data.firstname).toBe('firstname');
+    service.newBandILike<any>({ newBand: 'Illenium' }).subscribe((data: any) => {
+      expect(data.newBand).toBe('Illenium');
     });
 
-    const req = httpMock.expectOne(`http://google.com/`, 'post to api');
+    const req = httpMock.expectOne(`https://my-json-server.typicode.com/bth1994/fakeServer/db/`, 'post to api');
     expect(req.request.method).toBe('POST');
 
     req.flush({
-      firstname: 'firstname'
+      newBand: 'Illenium'
     });
     httpMock.verify();
   })
