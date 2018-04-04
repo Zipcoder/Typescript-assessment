@@ -1,4 +1,4 @@
-import {WuTangProvider} from './wu-tang';
+import { WuTangProvider } from './wu-tang';
 import { TestBed, inject } from '@angular/core/testing';
 import { HttpEvent, HttpEventType, HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
@@ -18,45 +18,45 @@ describe("The WuTang Provider's", () => {
             expect(WuTangProvider.prototype.wuTangIs()).toEqual("For the Children");
         })
     })
-    
+
     describe('myFavoriteBand method', () => {
-        it('should GET "Wu-Tang Clan" from the endpoint',inject([HttpTestingController, WuTangProvider], 
+        it('should GET "Wu-Tang Clan" from the endpoint: "https://www.somewebsite.com/tariq"', inject([HttpTestingController, WuTangProvider],
             (httpMock: HttpTestingController, wuTangProvider: WuTangProvider) => {
                 wuTangProvider.myFavoriteBand().subscribe((data: any) => {
-                
-                        expect(data.name).toEqual("Wu-Tang Clan");
-                    
+
+                    expect(data.name).toEqual("Wu-Tang Clan");
+
                 })
-    
+
                 const mockReq = httpMock.expectOne(wuTangProvider.url + '/tariq');
-                    expect (mockReq.cancelled).toBeFalsy();
-                    expect (mockReq.request.responseType).toEqual('json');
-                    expect (mockReq.request.method).toBe('GET');
-                    expect (mockReq.request.url).toBe('https://www.somewebsite.com/tariq');
-                mockReq.flush({name: "Wu-Tang Clan"});
+                expect(mockReq.cancelled).toBeFalsy();
+                expect(mockReq.request.responseType).toEqual('json');
+                expect(mockReq.request.method).toBe('GET');
+                expect(mockReq.request.url).toBe('https://www.somewebsite.com/tariq');
+                mockReq.flush({ name: "Wu-Tang Clan" });
                 httpMock.verify();
-    
-        })
+
+            })
         )
     })
 
     describe('newBandILike method', () => {
-        it('should POST a new band to the endpoint',inject([HttpTestingController, WuTangProvider], 
+        it('should POST "The Roots" to the endpoint: "https://www.somewebsite.com/tariq"', inject([HttpTestingController, WuTangProvider],
             (httpMock: HttpTestingController, wuTangProvider: WuTangProvider) => {
                 wuTangProvider.newBandILike('The Roots').subscribe((data: any) => {
-                
-                        expect(data.name).toEqual("The Roots");
-                    
+
+                    expect(data).toEqual({name: "The Roots"});
+
                 })
-    
+
                 const mockReq = httpMock.expectOne(wuTangProvider.url + '/tariq');
-                    expect (mockReq.cancelled).toBeFalsy();
-                    expect (mockReq.request.method).toBe('POST');
-                    expect (mockReq.request.url).toBe('https://www.somewebsite.com/tariq');
-                mockReq.flush({name: "The Roots"});
+                expect(mockReq.cancelled).toBeFalsy();
+                expect(mockReq.request.method).toBe('POST');
+                expect(mockReq.request.url).toBe('https://www.somewebsite.com/tariq');
+                mockReq.flush({ name: "The Roots" });
                 httpMock.verify();
-    
-        })
+
+            })
         )
     })
 })
