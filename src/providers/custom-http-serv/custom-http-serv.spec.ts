@@ -4,16 +4,6 @@ import { TestBed } from '@angular/core/testing';
 import { CustomHttpServProvider } from './custom-http-serv';
 
 
-describe('Provider Service', () => {
-    let service: CustomHttpServProvider;
-    it('should return a string wuTang', () => {
- 
-        expect(service.wuTangls).toBe('For the Children');
- 
-    });
- 
-});
-
 describe('CustomHttpService', () => {
 
   let service: CustomHttpServProvider;
@@ -30,11 +20,18 @@ describe('CustomHttpService', () => {
     service = TestBed.get(CustomHttpServProvider);
     httpMock = TestBed.get(HttpTestingController);
 });
+
+    it('should return for the children', () => {
+        expect(service.wuTangls()).toBe('For the Children');
+    });
+
     it('should get my favorite band name', () => {
         service.myFavoriteBand(1).subscribe((data: any) => {
           expect(data.name).toBe('Imagine Dragons');
         });
+
       });
+      
      
       it('should get the correct band name part 2', () => {
         service.myFavoriteBand(1).subscribe((data: any) => {

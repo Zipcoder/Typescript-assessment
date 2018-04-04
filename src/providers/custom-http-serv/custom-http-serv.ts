@@ -11,10 +11,13 @@ import { Injectable } from '@angular/core';
 export class CustomHttpServProvider {
   
 
+    
+
+    
   constructor(public httpClient: HttpClient) {
   }
 
-  wuTangls() : string {
+  wuTangls(): any {
     return 'For the Children';
   }
 
