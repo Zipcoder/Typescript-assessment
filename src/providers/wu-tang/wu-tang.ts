@@ -16,13 +16,14 @@ export class WuTangProvider {
 		return "For the Children";
 	}
 
-	public myFavoriteBand(): string {
-		//this.http.get('assets/data/favoriteBand.json').map((res: Response) => res.json()).subscribe(data => {
-			//this.favoriteBand = data.favoriteBand;
-			//this.bandsILike.push(data.favoriteBand);
-		//});
-		//return this.favoriteBand;
-		return "WuTang";
+	public myFavoriteBand(): Observable<string> {
+		return this.client.get<string>('assets/data/favoriteBand.json', {
+			headers: new HttpHeaders(
+				{
+					'Authorization': 'my-auth-token'
+				}
+			)
+		});
 	}
 
 	public newBandILike(band: string): Observable<string> {
@@ -35,9 +36,5 @@ export class WuTangProvider {
 
 		let thisBand: string;
 		return this.client.post<string>('assets/data/favoriteBand.json', JSON.stringify(band), httpOptions);
-	}
-
-	public handleResponse(data: any): void {
-		this.bandsILike.push(data.band);
 	}
 }

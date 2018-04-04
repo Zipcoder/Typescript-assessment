@@ -26,8 +26,9 @@ describe('WuTangProvider', () => {
 	});
 
 	it('should be my favorite band', () => {
-		let favoriteBand = wuTang.myFavoriteBand();
-		expect(favoriteBand).toEqual("WuTang");
+		wuTang.myFavoriteBand().subscribe(data => {
+			expect(data).toEqual("WuTang");
+		});
 	});
 
 	it('should accept new bands I like', () => {
