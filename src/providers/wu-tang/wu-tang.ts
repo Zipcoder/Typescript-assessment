@@ -12,8 +12,8 @@ export class WuTangProvider {
   	return "For the Children";
   }
 
-  myFavoriteBand<T>(band: number){
-  	return this.http.get<T>(`http://test.api.here/whatevs/${band}`);
+  myFavoriteBand<T>(id: number){
+  	return this.http.get<T>(`http://test.api.here/whatevs/${id}`);
   }
 
   newBandILIke<T>(item: any){
