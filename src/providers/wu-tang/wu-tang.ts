@@ -11,6 +11,7 @@ import { Injectable } from '@angular/core';
 export class WuTangProvider {
   httpClient: any;
   url = `http://replace.with.api/anything/WuTang`;
+  posturl =`http://replace.with.api/anything/newBand`;
 
   constructor(public http: HttpClient) {
     console.log('Hello WuTangProvider Provider');
@@ -26,6 +27,15 @@ export class WuTangProvider {
     });
 
     return this.http.request(req);
+  }
+  
+  newBandILIke(band: string) {
+    const req = new HttpRequest('POST', this.url, {
+      reportProgress: true
+    });
+
+    return this.http.post(this.posturl, {band});
+
   }
 
 }
