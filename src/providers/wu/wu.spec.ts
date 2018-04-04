@@ -1,4 +1,9 @@
 import { WuProvider } from "./wu";
+import {
+    HttpClientTestingModule,
+    HttpTestingController
+  } from "@angular/common/http/testing";
+  import { TestBed } from "@angular/core/testing";
 
 let MethodMan = null;
 let HttpClient = null;
@@ -12,3 +17,34 @@ let HttpClient = null;
             expect(output).toBe("For the Children");
         });
     });
+
+
+describe("Test Suite", () => {
+    describe("GET test", () => {
+      let provider: WuProvider;
+      let httpMocK: HttpTestingController;
+      beforeEach(() => {
+        TestBed.configureTestingModule({
+          imports: [HttpClientTestingModule],
+          providers: [WuProvider]
+        });
+        provider = TestBed.get(WuProvider);
+        httpMocK = TestBed.get(HttpTestingController);
+      });
+      it("Should get desired band", () => {
+        provider.myFavoriteBand().subscribe((data: any) => {
+          expect(data.name).toBe("Linkin Park");
+        });
+  
+        const req = httpMocK.expectOne(
+          `http://wutangclan.toolit/whatever/1`,
+        );
+        expect(req.request.method).toBe("GET");
+        req.flush({
+          name: "Linkin Park"
+        });
+  
+        httpMocK.verify();
+        });
+    });
+});

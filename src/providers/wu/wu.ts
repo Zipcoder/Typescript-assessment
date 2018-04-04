@@ -21,4 +21,10 @@ export class WuProvider {
     //haha return cream tho
   }
 
+  myFavoriteBand(){
+    return this.http.get(`http://wutangclan.toolit/whatever/1`);
+  }
+
+
+
 }
