@@ -42,18 +42,15 @@ describe('WuTang Service', () => {
     });
 
     it('should post the correct data', () => {
-        wuTang.newBandILike<any>('NWA').subscribe((data: any) => {
-          expect(data.firstname).toBe('NWA');
+        wuTang.newBandILike<any>({band: 'NWA'}).subscribe((data: any) => {
+          expect(data.band).toBe('NWA');
         });
-      
-        const req = httpMock.expectOne(`http://www.mocky.io/v2/5185415ba171ea3a00704eed`, 'post to api');
+        const req = httpMock.expectOne(`http://www.mocky.io/v2/5185415ba171ea3a00704eed/`, 'post to api');
         expect(req.request.method).toBe('POST');
-      
         req.flush({
-          firstname: 'NWA'
+          band: 'NWA'
         });
-      
         httpMock.verify();
-      });
+    });
 
 });

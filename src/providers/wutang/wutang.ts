@@ -18,7 +18,7 @@ export class WutangProvider {
     return this.httpClient.get<T>(`http://www.mocky.io/v2/5185415ba171ea3a00704eed/${id}`)
   }
 
-  newBandILike<T>(band: string) {
+  newBandILike<T>(band: any) {
     return this.httpClient.post<T>(`http://www.mocky.io/v2/5185415ba171ea3a00704eed/`, band)
   }
 
