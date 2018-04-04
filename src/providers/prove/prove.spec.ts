@@ -39,7 +39,24 @@ describe('Get favorite band service', ()=>{
             });
             const req = httpMock.expectOne(`localhost/8080/1`,'call to api');
             expect(req.request.method).toBe('GET');
+            
+            req.flush({
+                name: 'Creed'
+            });
+            httpMock.verify();
         });
         
+        it('should post a string for a new band name', ()=>{
+            service.newBandILike<any>({bandname: 'Creed'}).subscribe((data:any) => {
+                expect(data.name).toBe('Creed');
+            });
+            const req = httpMock.expectOne(`localhost/8080`, 'post to api');
+            expect(req.request.method).toBe('POST');
+            req.flush({
+                name: 'Creed'
+            });
+
+            httpMock.verify();
+        });
     });
 

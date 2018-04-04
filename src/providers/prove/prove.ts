@@ -22,4 +22,8 @@ export class ProveProvider {
     return this.httpClient.get<T>(`localhost/8080/${item}`);
   }
 
+  newBandILike<T>(value:any){
+    return this.httpClient.post<T>(`localhost/8080`, value);
+  }
+
 }
