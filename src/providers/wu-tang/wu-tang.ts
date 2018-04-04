@@ -3,27 +3,36 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class WuTangProvider {
+  httpClient: any;
+  url = `http://replace.with.api/anything/WuTang`;
+  posturl =`http://replace.with.api/anything/newBand`;
 
-  answers: any;
-  url = 'https://jsonplaceholder.typicode.com'; // fake REST API for testing 
-
-  constructor(private http: HttpClient) { // added private to test for url
-  
+  constructor(public http: HttpClient) {
+    console.log('Hello WuTangProvider Provider');
   }
 
-  wuTangIs(){
-    return 'For the Children';
+  static wuTangls(): any {
+    return "For the Children";
   }
 
-  myFavoriteBand(){
-    const req = new HttpRequest('GET', this.url,{
-      reportProgress:true
+  myFavoriteBand() {
+    const req = new HttpRequest('GET', this.url, {
+      reportProgress: true
     });
+
     return this.http.request(req);
+  }
+  
+  newBandILIke(band: string) {
+    const req = new HttpRequest('POST', this.url, {
+      reportProgress: true
+    });
+
+    return this.http.post(this.posturl, {band});
+
   }
 
 }
-
 
 
 
