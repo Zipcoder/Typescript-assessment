@@ -17,5 +17,5 @@ beforeEach(() => {
 });
     it('Be for the kids', () => {
         let result = service.wuTang()
-        expect(result).toContain('For the children');
+        expect(result).toEqual('For the children');
     });

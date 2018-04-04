@@ -16,7 +16,7 @@ export class WuTangProvider {
 
   wuTang() : string
   {
-    return "For the Children";
+    return "For the children";
   }
 
 }
