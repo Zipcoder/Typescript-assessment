@@ -4,12 +4,24 @@ import { HttpEvent, HttpEventType } from '@angular/common/http';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import { MyServiceProvider } from '../../providers/my-service/my-service';
 
- 
-describe('MagicBall', () => {
+let wuTangClan = null;
+let HttpClient = null;
+describe('Testing wuTangIs', () => {
+  beforeEach(() => {
+    wuTangClan = new MyServiceProvider(HttpClient);
+  });
+
+  it('should return for the children', () => {
+    let result = wuTangClan.wuTangIs();
+  expect(result).toBe("For the children");
+  });
+});
+
+describe('MyServiceProvider', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        providers: [MyServiceProvider]
+        providers: [MyServiceProvider ]
       });
     });
    
@@ -23,7 +35,7 @@ describe('MagicBall', () => {
             { name: 'Juliette', website: 'nope.com' }
           ];
    
-          dataService.getData().subscribe((event: HttpEvent<any>) => {
+          dataService.myFavoriteBand().subscribe((event: HttpEvent<any>) => {
             switch (event.type) {
               case HttpEventType.Response:
                 expect(event.body).toEqual(mockUsers);
@@ -41,3 +53,6 @@ describe('MagicBall', () => {
       )
     );
    });
+    
+
+    

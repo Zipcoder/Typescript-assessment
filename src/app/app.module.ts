@@ -15,7 +15,8 @@ import { MyServiceProvider } from '../providers/my-service/my-service';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    MyServiceProvider
   ],
   bootstrap: [IonicApp],
   entryComponents: [
