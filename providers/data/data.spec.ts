@@ -8,7 +8,13 @@ import {
 
 import { DataProvider } from './data';
 
+let DataProvider = null;
 
+describe('A test for wuTangIs', () => {
+  it('says For the Children', () => {
+    expect(wuTangIs()).toEqual('For the Children')
+  });
+});
 
 describe('DataProvider', () => {
   beforeEach(() => {
@@ -19,12 +25,12 @@ describe('DataProvider', () => {
   });
 
   it(
-    'should get users',
+    'should get string',
     inject(
       [HttpTestingController, DataProvider],
       (httpMock: HttpTestingController, dataService: DataProvider) => {
         const mockUsers = [
-          { name: 'Bob', website: 'www.yessss.com' },
+          { name: 'Cash Rules Everything Around Me', website: 'www.yessss.com' },
           { name: 'Juliette', website: 'nope.com' }
         ];
 
@@ -61,7 +67,7 @@ describe('DataProvider', () => {
 
         req.flush({
           item: 'firstname',
-          name: 'Bo'
+          name: ''
         });
 
         httpMock.verify();

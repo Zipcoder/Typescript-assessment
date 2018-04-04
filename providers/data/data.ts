@@ -5,20 +5,19 @@ import { HttpClient, HttpRequest } from '@angular/common/http';
 export class DataProvider {
   url = 'https://jsonplaceholder.typicode.com/users';
   postUrl = 'http://replace.with.api/anything';
+  answer: any;
 
-  constructor(private http: HttpClient) {
+  constructor() {
+
+
+    this.answer = ['For the Children'];
   }
 
-  getData() {
-    const req = new HttpRequest('GET', this.url, {
-      reportProgress: true
-    });
-
-    return this.http.request(req);
+  wuTangIs() {
+    return this.answer
   }
 
-  post(item: any, name: string) {
-    return this.http.post(this.postUrl, {item, name});
-  }
 
 }
+
+
