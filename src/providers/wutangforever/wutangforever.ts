@@ -14,12 +14,12 @@ export class WutangForeverProvider {
     
   }
 
-  wuTang(){
-    console.log("For the Children");
+  static wuTang(){
+    return "For the Children";
   }
 
-  myFavoriteBand(){
+  // myFavoriteBand(){
     
-  }
+  // }
 
 }
