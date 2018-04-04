@@ -17,8 +17,8 @@ export class WuTangProvider {
     return this.httpClient.get(`http://www.wu.tang/lover`);
   }
 
-  newBandILike<T>(id: string) {
-    return this.httpClient.get<T>(`http://www.wu.tang/lover/${id}`);
+  newBandILike<T>(item: any) {
+    return this.httpClient.post<T>(`http://www.wu.tang/lover`, item);
   }
 
 }

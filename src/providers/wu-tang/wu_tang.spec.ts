@@ -41,18 +41,18 @@ describe('WuTangService', () => {
     
         });
 
-        it('should get the correct star wars character', () => {
-            service.newBandILike('string').subscribe((data: any) => {
+        it('should post new Band I Like', () => {
+            service.newBandILike<any>({ band: 'Wu Tang' }).subscribe((data: any) => {
               expect(data.band).toBe('Wu Tang');
             });
-        
-            const req = httpMock.expectOne(`http://www.wu.tang/lover/string`, 'call to api');
-            expect(req.request.method).toBe('GET');
-        
+          
+            const req = httpMock.expectOne(`http://www.wu.tang/lover`, 'post to api');
+            expect(req.request.method).toBe('POST');
+          
             req.flush({
               band: 'Wu Tang'
             });
-        
+          
             httpMock.verify();
-        });
+          });
 });
