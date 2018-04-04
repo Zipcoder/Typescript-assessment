@@ -5,6 +5,7 @@
   "homepage": "http://ionicframework.com/",
   "private": true,
   "scripts": {
+    "test": "ng test",
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
     "lint": "ionic-app-scripts lint",
@@ -32,6 +33,7 @@
     "zone.js": "0.8.20"
   },
   "devDependencies": {
+    "@angular/cli": "^1.7.3",
     "@ionic/app-scripts": "3.1.8",
     "@types/jasmine": "^2.8.6",
     "@types/node": "^9.6.2",
