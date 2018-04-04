@@ -7,6 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { WuTangIsProvider } from '../providers/wu-tang-is/wu-tang-is';
+import { DataProvider } from '../providers/data/data';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { WuTangIsProvider } from '../providers/wu-tang-is/wu-tang-is';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    WuTangIsProvider
+    WuTangIsProvider,
+    DataProvider
   ]
 })
 export class AppModule {}
