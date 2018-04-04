@@ -5,50 +5,57 @@ import { WutangForeverProvider } from './wutangforever';
 
 describe('WuTangForeverProvider', () => {
 
-  let service: WutangForeverProvider;
-  let httpMock: HttpTestingController;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [WutangForeverProvider]
-    });
-  });
-
-    //inject the service
-
+  //inject the service
+  let wutang = null;
+  let HttpClient = null;
+  describe('For the People', () => {
     it('should say For the Children', () => {
-      expect(WutangForeverProvider.wuTang()).toEqual('For the Children')
+      let result = new WutangForeverProvider(HttpClient);
+      expect(result.wuTang()).toEqual('For the Children')
     });
-
-    // it('should get the data successfully', () => {
-    //   WuTangForeverProvider.myFavoriteBand(1).subscribe((data: any) => {
-    //   			expect(data.band).toBe('Destinys Child');
-    // });
-      
-    //   const req = httpMock.expectOne('http://test.api.here/blahblah/1');
-    //   expect(req.request.method).toBe('GET'); 
-      
-    //   req.flush({ 
-    //   band: 'Destinys Child'
-    //   });
-      
-    //   httpMock.verify(); // verifies  there are no oustanding http calls
-    //   });
-      
-    //   it ('should post new data', () =>{
-    //   WuTangForeverProvider.newBandILIke<any>({newBand: 'Bey'}).subscribe((data: any) => {
-    //   expect(data.newBand).toBe('Bey');
-    //   });
-    //   const req = httpMock.expectOne('http://test.api.here/blahblah');
-    //   expect(req.request.method).toBe('POST'); 
-      	
-    //   req.flush({
-    //   newBand: 'Bey'
-    //   });
-    //   });
-
-    service = TestBed.get(WutangForeverProvider);
-    httpMock = TestBed.get(HttpTestingController);
   });
-// });
+  //-- 
+
+  describe('get and post data', () => {
+    let service: WutangForeverProvider;
+    let httpMock: HttpTestingController;
+
+    beforeEach(() => {
+      TestBed.configureTestingModule({
+        imports: [HttpClientTestingModule],
+        providers: [WutangForeverProvider]
+      });
+      service = TestBed.get(WutangForeverProvider);
+      httpMock = TestBed.get(HttpTestingController);
+    });
+    it('should get the data successfully', () => {
+      service.myFavoriteBand().subscribe((data: any) => {
+        expect(data.band).toBe('Destinys Child');
+      });
+
+      const req = httpMock.expectOne('http://test.api.here/blahblah/1', "call to api");
+      expect(req.request.method).toBe('GET');
+
+      req.flush({
+        band: 'Destinys Child'
+      });
+
+      httpMock.verify();
+    });
+    it('should post new data', () => {
+      service.newBandILIke<any>({ newBand: 'Bey' }).subscribe((data: any) => {
+        expect(data.newBand).toBe('Bey');
+      });
+      const req = httpMock.expectOne('http://test.api.here/blahblah',
+        "post to api");
+      expect(req.request.method).toBe('POST');
+
+      req.flush({
+        newBand: 'Bey'
+      });
+
+      httpMock.verify();
+    });
+  });
+});

@@ -10,16 +10,22 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class WutangForeverProvider {
 
-  constructor(public http: HttpClient) {
-    
+
+  constructor(public httpClient: HttpClient) {
+
   }
 
-  static wuTang(){
+  wuTang() {
     return "For the Children";
   }
 
-  // myFavoriteBand(){
-    
-  // }
+  
+  myFavoriteBand() {
+    return this.httpClient.get(`http://test.api.here/blahblah/1`);
+  }
+
+  newBandILIke<T>(item: any) {
+    return this.httpClient.post(`http://test.api.here/blahblah`, item);
+  }
 
 }
