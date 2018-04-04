@@ -25,4 +25,8 @@ export class TestRequestProvider {
     return this.http.get("fakeurl");
   }
 
+  newBandILike(){
+    return this.http.post("fakeurl", this.jasonTheJSON);
+  }
+
 }

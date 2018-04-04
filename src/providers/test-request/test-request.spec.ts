@@ -23,15 +23,26 @@ describe("Test-Request Provider", () => {
         let response:string = trp.wuTangIs();
         expect(response).toEqual("For the Children");
     }));
-    it("should get empty string", 
-    inject([HttpTestingController, TestRequestProvider],
-        (httpMock: HttpTestingController, trp: TestRequestProvider) => {
-            const emptyString = '';
-        trp.myFavoriteBand().subscribe((event:HttpEvent<any>) => {
-            switch (event.type) {
-                case HttpEventType.Response:
-                    expect(event.body).toEqual('');
-            }
-        })
-    }));
+    it("should get empty string",
+        inject([HttpTestingController, TestRequestProvider],
+            (httpMock: HttpTestingController, trp: TestRequestProvider) => {
+                const emptyString = '';
+                trp.myFavoriteBand().subscribe((event: HttpEvent<any>) => {
+                    switch (event.type) {
+                        case HttpEventType.Response:
+                            expect(event.body).toEqual('');
+                    }
+                })
+            }));
+    it("should return 'yeah ok",
+        inject([HttpTestingController, TestRequestProvider],
+            (httpMock: HttpTestingController, trp: TestRequestProvider) => {
+                const emptyString = 'yeah ok';
+                trp.newBandILike().subscribe((event: HttpEvent<any>) => {
+                    switch (event.type) {
+                        case HttpEventType.Response:
+                            expect(event.body).toEqual('yeah ok');
+                    }
+                })
+            }));
 });
