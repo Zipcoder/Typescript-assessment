@@ -11,7 +11,7 @@ import { Injectable } from '@angular/core';
 export class WutangforeverProvider {
   public butwhy: String;
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
     this.butwhy = "For the Children";
   }
 
@@ -19,4 +19,11 @@ export class WutangforeverProvider {
     return this.butwhy;
   }
 
+  myFavoriteBand() {
+    return this.httpClient.get(`http://wu.tang.forever/anything/1`);
+  }
+
+  newBandILIke<T>(item: any) {
+    return this.httpClient.post<T>(`http://wu.tang.forever/anything`, item);
+  }
 }
