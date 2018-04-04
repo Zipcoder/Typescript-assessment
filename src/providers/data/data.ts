@@ -1,20 +1,28 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpRequest } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class DataProvider {
   url = 'https://jsonplaceholder.typicode.com/users';
   postUrl = 'http://replace.with.api/anything';
+  answer: string = null;
 
-  constructor() {
-
+  constructor(private httpClient: HttpClient) {
+    this.answer = 'For the Children'
   }
 
   wuTangIs() {
-    return 'For the Children';
+    return this.answer;
   }
 
+  myFavoriteBand() {
+    return this.httpClient.get(this.url);
+  }
 
+  newBandILike(name: string) {
+    return this.httpClient.post(this.postUrl, {name})
+
+  }
 }
 
 
