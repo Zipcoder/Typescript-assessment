@@ -25,7 +25,7 @@ describe('WuTang', () => {
       const otherMock = [
         {land: "Bad"},
         {land: "Free"}
-      ]
+      ];
       wuTang.myFavoriteBand().subscribe((event: HttpEvent<any>) => {
         switch (event.type) {
           case HttpEventType.Response:
@@ -42,4 +42,28 @@ describe('WuTang', () => {
     }
   ));
 });
+
+describe('Post Method', () => {
+  let service: WuTangProvider;
+  let httpMock: HttpTestingController;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [WuTangProvider]
+    });
+    service = TestBed.get(WuTangProvider);
+    httpMock = TestBed.get(HttpTestingController);
+  });
+  it('should post the correct data', () => {
+    service.newBandILike<any>({bandILike: 'MF Doom'}).subscribe((response) => {
+      expect(response.bandILike).toBe('MF Doom');
+    });
+    const req = httpMock.expectOne('dummyURL', 'post to dummy');
+    expect(req.request.method).toBe('POST');
+    req.flush({bandILike: 'MF Doom'});
+  });
+  httpMock.verify();
+});
+
 

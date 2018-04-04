@@ -24,4 +24,7 @@ export class WuTangProvider {
     });
     return this.http.request(req);
   }
+  newBandILike<T>(value: any){
+    return this.http.post<T>('dummyURL', value);
+  }
 }
