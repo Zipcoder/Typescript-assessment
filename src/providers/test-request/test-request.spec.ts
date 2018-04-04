@@ -4,9 +4,6 @@ import { HttpClientModule, HttpClient, HttpHandler, HttpEvent, HttpEventType } f
 import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
 
 describe("Test-Request Provider", () => {
-    let trp:TestRequestProvider;
-    let http:HttpClient;
-    let handler:HttpHandler;
     beforeEach(() => {
         
         TestBed.configureTestingModule({
@@ -23,26 +20,20 @@ describe("Test-Request Provider", () => {
         let response:string = trp.wuTangIs();
         expect(response).toEqual("For the Children");
     }));
-    it("should get empty string",
+    it("should get reponse string",
         inject([HttpTestingController, TestRequestProvider],
             (httpMock: HttpTestingController, trp: TestRequestProvider) => {
-                const emptyString = '';
-                trp.myFavoriteBand().subscribe((event: HttpEvent<any>) => {
-                    switch (event.type) {
-                        case HttpEventType.Response:
-                            expect(event.body).toEqual('');
-                    }
-                })
+                const responseString = "test response";
+                trp.myFavoriteBand().subscribe(trpResponse =>
+                    expect(trpResponse).toEqual(responseString)
+                );
             }));
-    it("should return 'yeah ok",
+    it("should return new test string",
         inject([HttpTestingController, TestRequestProvider],
             (httpMock: HttpTestingController, trp: TestRequestProvider) => {
-                const emptyString = 'yeah ok';
-                trp.newBandILike().subscribe((event: HttpEvent<any>) => {
-                    switch (event.type) {
-                        case HttpEventType.Response:
-                            expect(event.body).toEqual('yeah ok');
-                    }
-                })
+                const returnValue = 'new test string';
+                trp.newBandILike().subscribe(trpResponse => 
+                    expect(trpResponse).toEqual(returnValue)
+                );
             }));
 });
