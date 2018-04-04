@@ -26,13 +26,12 @@ describe('MyServiceProvider', () => {
     });
    
     it(
-      'should get users',
+      'should get band',
       inject(
         [HttpTestingController, MyServiceProvider],
         (httpMock: HttpTestingController, dataService: MyServiceProvider) => {
           const mockUsers = [
-            { name: 'Bob', website: 'www.yessss.com' },
-            { name: 'Juliette', website: 'nope.com' }
+            { name: 'WuTang Clan'}
           ];
    
           dataService.myFavoriteBand().subscribe((event: HttpEvent<any>) => {
@@ -52,7 +51,23 @@ describe('MyServiceProvider', () => {
         }
       )
     );
-   });
-    
+    it('should post new band', 
+    inject(
+      [HttpTestingController, MyServiceProvider],
+    (httpMock: HttpTestingController, dataService: MyServiceProvider) => {
+      
+      dataService.newBandILike('Method Man').subscribe((data:any) => {
+            expect(data.bandName).toBe('Method Man');
+        });
+        
+        const req = httpMock.expectOne('/Users/aprilrivera/Dev/April/Typescript-assessment/src/manifest.json' ,'post to api');
+        expect(req.request.method).toBe('POST');
 
-    
+        req.flush({
+          bandName: 'Method Man'
+        });
+        httpMock.verify();
+      }
+    )
+  );
+});

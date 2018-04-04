@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class MyServiceProvider {
 url = "/Users/aprilrivera/Dev/April/Typescript-assessment/src/manifest.json";
 public wuTang: string;  
+public value: string
 
 constructor(public http: HttpClient) {
     this.wuTang = "For the children";
@@ -21,4 +22,7 @@ myFavoriteBand(){
 return this.http.request(req);
 };
 
+newBandILike<T>(item: string){
+  return this.http.post<T>(this.url, item);
+};
 }
