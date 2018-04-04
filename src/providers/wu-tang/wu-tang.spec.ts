@@ -33,4 +33,21 @@ describe('WuTangProvider', () => {
 	it('is for the children', inject([WuTangProvider, MockBackend], (wuTang, mockBackend)  => {
 		expect(wuTang.wuTangIs()).toBe("For the Children");
 	}));
+
+	it('should be my favorite band', inject([WuTangProvider, MockBackend], (wuTang, mockBackend) => {
+ 
+        const mockResponse = '{"favoriteBand":"WuTang"}';
+ 
+        mockBackend.connections.subscribe((connection) => {
+ 
+            connection.mockRespond(new Response(new ResponseOptions({
+                body: mockResponse
+            })));
+ 
+        });
+ 
+        let favoriteBand = wuTang.myFavoriteBand();
+ 
+        expect(favoriteBand).toEqual("WuTang");
+    }));
 });
