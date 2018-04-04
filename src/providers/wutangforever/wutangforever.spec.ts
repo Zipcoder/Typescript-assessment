@@ -36,9 +36,9 @@ describe("Type Script Assesment Test Suite", () => {
     });
     it("Should post the new band I like", () => {
       provider
-        .newBandILIke<any>({ favoriteband: "A Tribe Called Quest" })
+        .newBandILIke<any>({ bandname: "A Tribe Called Quest" })
         .subscribe((data: any) => {
-          expect(data.favoriteband).toBe("A Tribe Called Quest");
+          expect(data.bandname).toBe("A Tribe Called Quest");
         });
 
       const req = httpMocK.expectOne(
@@ -48,7 +48,7 @@ describe("Type Script Assesment Test Suite", () => {
       expect(req.request.method).toBe("POST");
 
       req.flush({
-        favoriteband: "A Tribe Called Quest"
+        bandname: "A Tribe Called Quest"
       });
 
       httpMocK.verify();
