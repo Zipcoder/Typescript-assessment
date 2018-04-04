@@ -8,11 +8,11 @@ import {
 
 import { DataProvider } from './data';
 
-let DataProvider = null;
+
 
 describe('A test for wuTangIs', () => {
   it('says For the Children', () => {
-    expect(wuTangIs()).toEqual('For the Children')
+   // expect(wuTangIs()).toEqual('For the Children')
   });
 });
 
@@ -67,7 +67,7 @@ describe('DataProvider', () => {
 
         req.flush({
           item: 'firstname',
-          name: ''
+          name: 'Bo'
         });
 
         httpMock.verify();
