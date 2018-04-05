@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { TestRequestProvider } from "../../providers/test-request/test-request";
 
 @Component({
   selector: 'page-home',
